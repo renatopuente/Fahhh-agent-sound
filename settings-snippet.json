@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "Add-Type -AssemblyName presentationCore; $mp = New-Object system.windows.media.mediaplayer; $mp.open([uri]'file:///C:/sounds/Fahhh.mp3'); $mp.Volume = 1.0; $mp.Play(); Start-Sleep 4",
+            "shell": "powershell",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "Add-Type -AssemblyName presentationCore; $mp = New-Object system.windows.media.mediaplayer; $mp.open([uri]'file:///C:/sounds/Fahhh.mp3'); $mp.Volume = 1.0; $mp.Play(); Start-Sleep 4",
+            "shell": "powershell",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
