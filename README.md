@@ -9,8 +9,24 @@ Reproduce un sonido personalizado (`Fahhh.mp3`) en Claude Code cuando:
 - Windows 10/11
 - Claude Code
 - PowerShell (incluido en Windows)
+- Node.js 16+ (solo para instalación con npx)
 
-## Instalación
+## Instalación rápida (recomendada)
+
+```bash
+npx fahhh-agent-sound
+```
+
+El instalador:
+1. Copia `Fahhh.mp3` a `~/sounds/`
+2. Agrega los hooks automáticamente a `~/.claude/settings.json`
+3. Muestra la ruta del MP3 y los eventos configurados
+
+Reinicia Claude Code después de instalarlo.
+
+---
+
+## Instalación manual
 
 1. Clona o descarga este repositorio.
 2. Copia `Fahhh.mp3` a una carpeta de tu preferencia (ej. `C:\sounds\`).
