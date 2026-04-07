@@ -1,24 +1,24 @@
-# Fahhh Agent Sound — Claude Code Hook
+# Fahhh Agent Sound — Hook para Claude Code
 
-Plays a custom sound (`Fahhh.mp3`) in Claude Code when:
-- **Claude asks for permission** to run a tool (`PermissionRequest`)
-- **Claude finishes responding** and waits for your input (`Stop`)
+Reproduce un sonido personalizado (`Fahhh.mp3`) en Claude Code cuando:
+- **Claude solicita permiso** para ejecutar una herramienta (`PermissionRequest`)
+- **Claude termina de responder** y espera tu input (`Stop`)
 
-## Requirements
+## Requisitos
 
 - Windows 10/11
 - Claude Code
-- PowerShell (included in Windows)
+- PowerShell (incluido en Windows)
 
-## Installation
+## Instalación
 
-1. Clone or download this repo.
-2. Copy `Fahhh.mp3` to a folder of your choice (e.g. `C:\sounds\`).
-3. Open your Claude Code global settings file:
+1. Clona o descarga este repositorio.
+2. Copia `Fahhh.mp3` a una carpeta de tu preferencia (ej. `C:\sounds\`).
+3. Abre el archivo de configuración global de Claude Code:
    ```
-   C:\Users\<YourUser>\.claude\settings.json
+   C:\Users\<TuUsuario>\.claude\settings.json
    ```
-4. Add the following hooks inside the `"hooks"` key (adjust the MP3 path):
+4. Agrega los siguientes hooks dentro de la clave `"hooks"` (ajusta la ruta del MP3):
 
 ```json
 "hooks": {
@@ -51,16 +51,16 @@ Plays a custom sound (`Fahhh.mp3`) in Claude Code when:
 }
 ```
 
-## Customize
+## Personalización
 
-- **Volume**: Change `$mp.Volume = 1.0` to any value between `0.0` and `1.0`.
-- **Sound**: Replace `Fahhh.mp3` with any MP3 file you want.
-- **Trigger**: Remove `PermissionRequest` or `Stop` block if you only want one trigger.
+- **Volumen**: Cambia `$mp.Volume = 1.0` a cualquier valor entre `0.0` y `1.0`.
+- **Sonido**: Reemplaza `Fahhh.mp3` con cualquier archivo MP3 que quieras usar.
+- **Disparador**: Elimina el bloque `PermissionRequest` o `Stop` si solo quieres uno de los dos.
 
-## How it works
+## Cómo funciona
 
-Claude Code supports [hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) — shell commands that run at specific lifecycle events. This hook uses PowerShell's built-in `System.Windows.Media.MediaPlayer` to play an MP3 without any external dependencies.
+Claude Code soporta [hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) — comandos de shell que se ejecutan en eventos específicos del ciclo de vida. Este hook utiliza `System.Windows.Media.MediaPlayer` de PowerShell para reproducir un MP3 sin dependencias externas.
 
 ---
 
-Made with Claude Code by [@renatopuente](https://github.com/renatopuente)
+Hecho con Claude Code por [@renatopuente](https://github.com/renatopuente)
