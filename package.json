@@ -1,10 +1,10 @@
 {
-  "name": "@renatopuente/fahhh-agent-sound",
+  "name": "@renatopuente/r2d2-agent-sound",
   "version": "1.2.0",
   "description": "Reproduce un sonido aleatorio de R2D2 en Claude Code cuando solicita permiso o termina de responder",
   "bin": {
-    "fahhh-agent-sound": "bin/install.js",
-    "fahhh-uninstall": "bin/uninstall.js"
+    "r2d2-agent-sound": "bin/install.js",
+    "r2d2-uninstall": "bin/uninstall.js"
   },
   "files": [
     "bin/",
@@ -22,9 +22,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/renatopuente/Fahhh-agent-sound.git"
+    "url": "git+https://github.com/renatopuente/R2D2-agent-sound.git"
   },
-  "homepage": "https://github.com/renatopuente/Fahhh-agent-sound#readme",
+  "homepage": "https://github.com/renatopuente/R2D2-agent-sound#readme",
   "engines": {
     "node": ">=16"
   }
