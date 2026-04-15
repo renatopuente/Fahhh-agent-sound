@@ -1,6 +1,6 @@
 {
   "name": "@renatopuente/r2d2-agent-sound",
-    "version": "1.2.1",
+      "version": "1.2.2",
   "description": "Reproduce un sonido aleatorio de R2D2 en Claude Code cuando solicita permiso o termina de responder",
   "bin": {
     "r2d2-agent-sound": "bin/install.js",
