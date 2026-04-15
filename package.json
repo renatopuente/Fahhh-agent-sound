@@ -1,14 +1,15 @@
 {
   "name": "@renatopuente/fahhh-agent-sound",
-  "version": "1.1.0",
-  "description": "Reproduce un sonido personalizado en Claude Code cuando solicita permiso o termina de responder",
+  "version": "1.2.0",
+  "description": "Reproduce un sonido aleatorio de R2D2 en Claude Code cuando solicita permiso o termina de responder",
   "bin": {
     "fahhh-agent-sound": "bin/install.js",
     "fahhh-uninstall": "bin/uninstall.js"
   },
   "files": [
     "bin/",
-    "Fahhh.mp3"
+    "R2D2_A.mp3",
+    "R2D2_B.mp3"
   ],
   "keywords": [
     "claude-code",
