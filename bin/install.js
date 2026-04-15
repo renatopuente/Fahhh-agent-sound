@@ -4,6 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+// Si se llama como: npx @renatopuente/fahhh-agent-sound fahhh-uninstall
+if (process.argv[2] === 'fahhh-uninstall') {
+        require(path.join(__dirname, 'uninstall.js'));
+        process.exit(0);
+}
+
 const isWindows = process.platform === 'win32';
 
 if (!isWindows) {
