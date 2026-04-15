@@ -7,62 +7,68 @@ const os = require('os');
 const isWindows = process.platform === 'win32';
 
 if (!isWindows) {
-  console.error('❌ Este hook solo funciona en Windows (usa PowerShell MediaPlayer).');
-  console.error('   Para macOS/Linux, adapta el comando a `afplay` o `mpg123`.');
-  process.exit(1);
+    console.error('❌ Este hook solo funciona en Windows (usa PowerShell MediaPlayer).');
+    console.error('   Para macOS/Linux, adapta el comando a `afplay` o `mpg123`.');
+    process.exit(1);
 }
 
-// 1. Copiar el MP3 a ~/sounds/
+// 1. Copiar los MP3 a ~/sounds/
 const soundsDir = path.join(os.homedir(), 'sounds');
 if (!fs.existsSync(soundsDir)) {
-  fs.mkdirSync(soundsDir, { recursive: true });
+    fs.mkdirSync(soundsDir, { recursive: true });
 }
 
-const mp3Src = path.join(__dirname, '..', 'Fahhh.mp3');
-const mp3Dest = path.join(soundsDir, 'Fahhh.mp3');
+const soundFiles = ['R2D2_A.mp3', 'R2D2_B.mp3'];
 
-if (!fs.existsSync(mp3Src)) {
-  console.error('❌ No se encontró Fahhh.mp3 en el paquete.');
-  process.exit(1);
+for (const soundFile of soundFiles) {
+    const src = path.join(__dirname, '..', soundFile);
+    const dest = path.join(soundsDir, soundFile);
+
+  if (!fs.existsSync(src)) {
+        console.error(`❌ No se encontró ${soundFile} en el paquete.`);
+        process.exit(1);
+  }
+
+  fs.copyFileSync(src, dest);
 }
 
-fs.copyFileSync(mp3Src, mp3Dest);
-
-// 2. Construir URI del archivo (barras forward para PowerShell)
-const mp3Uri = 'file:///' + mp3Dest.replace(/\\/g, '/');
+// 2. Construir URIs de los archivos (barras forward para PowerShell)
+const mp3UriA = 'file:///' + path.join(soundsDir, 'R2D2_A.mp3').replace(/\\/g, '/');
+const mp3UriB = 'file:///' + path.join(soundsDir, 'R2D2_B.mp3').replace(/\\/g, '/');
 
 // 3. Leer settings.json existente
 const settingsPath = path.join(os.homedir(), '.claude', 'settings.json');
 let settings = {};
-
 if (fs.existsSync(settingsPath)) {
-  try {
-    settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
-  } catch (e) {
-    console.error('⚠️  settings.json existente tiene JSON inválido. Creando backup...');
-    fs.copyFileSync(settingsPath, settingsPath + '.bak');
-  }
+    try {
+          settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    } catch (e) {
+          console.error('⚠️ settings.json existente tiene JSON inválido. Creando backup...');
+          fs.copyFileSync(settingsPath, settingsPath + '.bak');
+    }
 }
 
-// 4. Construir entrada del hook
+// 4. Construir entrada del hook con selección aleatoria entre R2D2_A y R2D2_B
 const hookCommand =
-  `Add-Type -AssemblyName presentationCore; ` +
-  `$mp = New-Object system.windows.media.mediaplayer; ` +
-  `$mp.open([uri]'${mp3Uri}'); ` +
-  `$mp.Volume = 1.0; ` +
-  `$mp.Play(); ` +
-  `Start-Sleep 4`;
+    `$sounds = @('${mp3UriA}', '${mp3UriB}'); ` +
+    `$uri = $sounds | Get-Random; ` +
+    `Add-Type -AssemblyName presentationCore; ` +
+    `$mp = New-Object system.windows.media.mediaplayer; ` +
+    `$mp.open([uri]$uri); ` +
+    `$mp.Volume = 1.0; ` +
+    `$mp.Play(); ` +
+    `Start-Sleep 4`;
 
 const hookEntry = {
-  matcher: '',
-  hooks: [
-    {
-      type: 'command',
-      command: hookCommand,
-      shell: 'powershell',
-      async: true,
-    },
-  ],
+    matcher: '',
+    hooks: [
+      {
+              type: 'command',
+              command: hookCommand,
+              shell: 'powershell',
+              async: true,
+      },
+        ],
 };
 
 // 5. Inyectar hooks (sin pisar los existentes de otros eventos)
@@ -73,19 +79,19 @@ settings.hooks.Stop = [hookEntry];
 // 6. Guardar settings.json
 const claudeDir = path.join(os.homedir(), '.claude');
 if (!fs.existsSync(claudeDir)) {
-  fs.mkdirSync(claudeDir, { recursive: true });
+    fs.mkdirSync(claudeDir, { recursive: true });
 }
 fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2), 'utf8');
 
 console.log('');
-console.log('✅ Fahhh sound hook instalado correctamente!');
+console.log('✅ R2D2 sound hook instalado correctamente!');
 console.log('');
-console.log('   🔊 MP3 guardado en :  ' + mp3Dest);
-console.log('   ⚙️  Settings en     :  ' + settingsPath);
+console.log(' 🔊 Sonidos guardados en : ' + soundsDir);
+console.log(' ⚙️  Settings en         : ' + settingsPath);
 console.log('');
-console.log('   El sonido se reproducirá cuando Claude:');
-console.log('   • Solicite permiso para ejecutar una herramienta (PermissionRequest)');
-console.log('   • Termine de responder y espere tu input (Stop)');
+console.log(' El sonido (R2D2_A o R2D2_B aleatorio) se reproducirá cuando Claude:');
+console.log(' • Solicite permiso para ejecutar una herramienta (PermissionRequest)');
+console.log(' • Termine de responder y espere tu input (Stop)');
 console.log('');
-console.log('   Reinicia Claude Code para aplicar los cambios.');
+console.log(' Reinicia Claude Code para aplicar los cambios.');
 console.log('');
