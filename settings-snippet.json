@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "Add-Type -AssemblyName presentationCore; $mp = New-Object system.windows.media.mediaplayer; $mp.open([uri]'file:///C:/sounds/Fahhh.mp3'); $mp.Volume = 1.0; $mp.Play(); Start-Sleep 4",
+            "command": "$sounds = @('file:///C:/sounds/R2D2_A.mp3', 'file:///C:/sounds/R2D2_B.mp3'); $uri = $sounds | Get-Random; Add-Type -AssemblyName presentationCore; $mp = New-Object system.windows.media.mediaplayer; $mp.open([uri]$uri); $mp.Volume = 1.0; $mp.Play(); Start-Sleep 4",
             "shell": "powershell",
             "async": true
           }
@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "Add-Type -AssemblyName presentationCore; $mp = New-Object system.windows.media.mediaplayer; $mp.open([uri]'file:///C:/sounds/Fahhh.mp3'); $mp.Volume = 1.0; $mp.Play(); Start-Sleep 4",
+            "command": "$sounds = @('file:///C:/sounds/R2D2_A.mp3', 'file:///C:/sounds/R2D2_B.mp3'); $uri = $sounds | Get-Random; Add-Type -AssemblyName presentationCore; $mp = New-Object system.windows.media.mediaplayer; $mp.open([uri]$uri); $mp.Volume = 1.0; $mp.Play(); Start-Sleep 4",
             "shell": "powershell",
             "async": true
           }
