@@ -17,7 +17,7 @@ Cada vez que se dispara el hook, se selecciona aleatoriamente uno de los dos son
 ## Instalación rápida (recomendada)
 
 ```bash
-npx @renatopuente/fahhh-agent-sound
+npx @renatopuente/r2d2-agent-sound
 ```
 
 Esto descarga e instala el paquete automáticamente sin necesidad de clonar el repositorio.
@@ -33,13 +33,13 @@ Reinicia Claude Code después de instalarlo.
 ## Desinstalación
 
 ```bash
-npx @renatopuente/fahhh-agent-sound fahhh-uninstall
+npx @renatopuente/r2d2-agent-sound r2d2-uninstall
 ```
 
 O si ya instalaste el paquete globalmente:
 
 ```bash
-fahhh-uninstall
+r2d2-uninstall
 ```
 
 ### El desinstalador:
